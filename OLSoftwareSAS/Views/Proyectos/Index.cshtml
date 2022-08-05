@@ -212,37 +212,26 @@
                 });
         });
 /*------------Para el modal N° 1----------------------*/
-            if (document.querySelector("#formUsuario")) {
-                let formUsuario = document.querySelector("#formUsuario");
-                formUsuario.onsubmit = function (e) {
-                    e.preventDefault();
-                    let strIdentificacion = document.querySelector('#txtIdentificacion').value;
-                    let strNombre = document.querySelector('#txtNombre').value;
-                    let strApellido = document.querySelector('#txtApellido').value;
-                    let strEmail = document.querySelector('#txtEmail').value;
-                
-                    let strPassword = document.querySelector('#txtPassword').value;
-               
-        
-
-                    if (strIdentificacion == '' || strApellido == '' || strNombre == '' || strEmail == '' ) {
-                        swal("Atención", "Todos los campos son obligatorios.", "error");
-                        return false;
-                    }
-
-                    let elementsValid = document.getElementsByClassName("valid");
-                    for (let i = 0; i < elementsValid.length; i++) {
-                        if (elementsValid[i].classList.contains('is-invalid')) {
-                            swal("Atención", "Por favor verifique los campos en rojo.", "error");
-                            return false;
-                        }
-                    }
-                   
-
-                    var data = { strIdentificacion: strIdentificacion, strNombre: strNombre, strApellido: strApellido, strEmail: strEmail,  strPassword: strPassword };
-                      $.ajax({
-                            type: "POST",
-                            url: "@Url.Action("InsertCli", "Panel")",
+           
+        }, false);
+        function openModal() {
+                $('#modalNewPro').modal('show');
+            }
+         function fntDelPro(id) {
+            id = parseInt(id);
+            var data = { id: id };
+            swal({
+                title: "¿Esta seguro que desea eliminar este proyecto?",
+                text: "¡Una vez realizado esto no se puede deshacer!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: "Delete",
+                            url: "@Url.Content("~/Proyectos/DeleteProyecto")",
                             content: "application/json; charset=utf-8",
                             dataType: "json",
                             data: data,
@@ -254,18 +243,14 @@
                                         title: "Éxito al procesar la petición",
                                         text: msg,
                                     });
-                                    $('#modalNewDoc').modal("hide");
-                                    formUsuario.reset();
-                                    tableClientes.ajax.reload();
+                                    tableProyectos.ajax.reload();
                                 }else {
                                     swal("Error", {
                                         icon: "error",
                                         title: "Error al procesar la petición",
                                         text: msg,
                                     });
-                                    $('#modalNewDoc').modal("hide");
-                                    formUsuario.reset();
-                                    tableClientes.ajax.reload();
+                                    tableProyectos.ajax.reload();
                                 }
                             },
                             error: function (xhr, textStatus, errorThrown) {
@@ -274,19 +259,16 @@
                                     title: "Error al procesar la petición",
                                     text: "Por favor comunique a un administrador en caso de que el error persista.",
                                 });
-                                $('#modalNewDoc').modal("hide");
-                                formUsuario.reset();
-                                tableClientes.ajax.reload();
+
                             }
                         });
-                       }
-                        return false;
-            }
-        }, false);
-        function openModal() {
-                $('#modalNewPro').modal('show');
-            }
-
+                    } else {
+                        swal("Acción cancelada", {
+                            icon: "error",
+                        });
+                    }
+                });
+        }
     </script>
 }
 

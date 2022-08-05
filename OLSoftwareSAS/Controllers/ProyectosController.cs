@@ -40,9 +40,17 @@ namespace OLSoftwareSAS.Controllers
             return new JsonResult(new {data = data});
         }
         [HttpDelete]
-        public IActionResult DeleteProyecto()
+        public IActionResult DeleteProyecto(long id)
         {
-            return new JsonResult(new {  });
+            Proyectos proyecto;
+            using (ApplicationDBContext db = new ApplicationDBContext())
+            {
+                proyecto = db.Proyectos.Where(d => d.Pro_ID == id).FirstOrDefault();
+                db.Proyectos.Remove(proyecto);
+                db.SaveChanges();
+                return new JsonResult(new { Success = true, msg = "Eliminado con exito" });
+            }
+            return new JsonResult(new {Success = false, msg = "No se pudo procesar" });
         }
     }
 }

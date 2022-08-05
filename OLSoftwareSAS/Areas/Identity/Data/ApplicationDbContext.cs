@@ -10,12 +10,14 @@ namespace OLSoftwareSAS.Areas.Identity.Data
 {
     public class ApplicationDBContext : DbContext
     {
-        public ApplicationDBContext()
+        public ApplicationDBContext() 
         {
         }
+        
 
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options) { }
         public DbSet<Clientes> Clientes { get; set; }
         public DbSet<Proyectos> Proyectos { get; set; }
+       
     }
 }

@@ -33,6 +33,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
     
 });
 builder.Services.AddScoped<IProyectosService, ProyectosService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
