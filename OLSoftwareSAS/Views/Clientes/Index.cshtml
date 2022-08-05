@@ -1,0 +1,60 @@
+﻿@model IEnumerable<OLSoftwareSAS.Models.Clientes>
+
+@{
+    ViewData["Title"] = "Clientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Clientes</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo cliente</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cli_Nombres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cli_Apellidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cli_Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cli_Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cli_Documento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cli_Nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cli_Apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cli_Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cli_Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cli_Documento)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Cli_ID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Cli_ID">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.Cli_ID">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

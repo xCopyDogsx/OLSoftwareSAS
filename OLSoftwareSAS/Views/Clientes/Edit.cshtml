@@ -1,0 +1,55 @@
+﻿@model OLSoftwareSAS.Models.Clientes
+
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Editar</h1>
+
+<h4>Cliente</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Cli_ID" />
+            <div class="form-group">
+                <label asp-for="Cli_Nombres" class="control-label"></label>
+                <input asp-for="Cli_Nombres" class="form-control" />
+                <span asp-validation-for="Cli_Nombres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cli_Apellidos" class="control-label"></label>
+                <input asp-for="Cli_Apellidos" class="form-control" />
+                <span asp-validation-for="Cli_Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cli_Email" class="control-label"></label>
+                <input asp-for="Cli_Email" class="form-control" />
+                <span asp-validation-for="Cli_Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cli_Telefono" class="control-label"></label>
+                <input asp-for="Cli_Telefono" class="form-control" />
+                <span asp-validation-for="Cli_Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cli_Documento" class="control-label"></label>
+                <input asp-for="Cli_Documento" class="form-control" />
+                <span asp-validation-for="Cli_Documento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
